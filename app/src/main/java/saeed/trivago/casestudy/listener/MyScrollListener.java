@@ -2,7 +2,7 @@ package saeed.trivago.casestudy.listener;
 
 import android.widget.AbsListView;
 
-import static saeed.trivago.casestudy.util.AppConstants.NUMBER_OF_ITEM_PER_REQUEST;
+import static saeed.trivago.casestudy.util.AppConstants.NUMBER_OF_ITEMS_PER_REQUEST;
 
 /**
  * An infinite scroll listener for a {@code ListView}
@@ -11,7 +11,7 @@ import static saeed.trivago.casestudy.util.AppConstants.NUMBER_OF_ITEM_PER_REQUE
 public abstract class MyScrollListener implements AbsListView.OnScrollListener {
 
     // The current page of visible items
-    private int mCurrentPageOfItems;
+    private int mCurrentPageOfItems = 1;
 
     // Is movies being fetched
     private boolean isFetchingMovie = true;
@@ -39,7 +39,7 @@ public abstract class MyScrollListener implements AbsListView.OnScrollListener {
             mCurrentPageOfItems++;
         }
 
-        if (!isFetchingMovie && (i2 - i1) <= (i + NUMBER_OF_ITEM_PER_REQUEST)) {
+        if (!isFetchingMovie && (i2 - i1) <= (i + NUMBER_OF_ITEMS_PER_REQUEST)) {
             loadMoreMovies(mCurrentPageOfItems + 1);
             isFetchingMovie = true;
         }
