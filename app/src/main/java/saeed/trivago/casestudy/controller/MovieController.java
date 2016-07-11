@@ -19,7 +19,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import saeed.trivago.casestudy.model.Movie;
-import saeed.trivago.casestudy.model.MovieId;
+import saeed.trivago.casestudy.model.MovieIds;
 import saeed.trivago.casestudy.ui.MovieActivity;
 
 import static saeed.trivago.casestudy.util.AppConstants.CONTENT_TYPE;
@@ -91,8 +91,9 @@ public class MovieController extends Fragment {
                 mCall = okHttpClient.newCall(request);
                 Response okHttpResponse = mCall.execute();
                 String response = okHttpResponse.body().string();
+                // String headers = okHttpResponse.headers().
                 if (IS_DEBUG) {
-                    Log.v("Response", response);
+                    Log.v("Response", "Response  = " + response);
                 }
                 JSONArray responseJson = new JSONArray(response);
 
@@ -101,7 +102,7 @@ public class MovieController extends Fragment {
 
                     String movieTitle = movieJSON.has("title") ? movieJSON.getString("title") : "N/A";
                     String movieYear = movieJSON.has("year") ? movieJSON.getString("year") : "N/A";
-                    ArrayList<MovieId> movieIds = new ArrayList<>();
+                    MovieIds movieIds = null;
                     if (movieJSON.has("ids")) {
                         JSONObject ids = movieJSON.getJSONObject("ids");
                         String trakt = ids.has("trakt") ? String.valueOf(ids.getInt("trakt")) : "N/A";
@@ -109,22 +110,14 @@ public class MovieController extends Fragment {
                         String imdb = ids.has("imdb") ? ids.getString("imdb") : "N/A";
                         String tmdb = ids.has("tmdb") ? ids.getString("tmdb") : "N/A";
 
-                        MovieId traktId = new MovieId("Trakt", trakt);
-                        MovieId slugId = new MovieId("Slug", slug);
-                        MovieId imdbId = new MovieId("IMDB", imdb);
-                        MovieId tmdbId = new MovieId("TMDb", tmdb);
-
-                        movieIds.add(traktId);
-                        movieIds.add(slugId);
-                        movieIds.add(imdbId);
-                        movieIds.add(tmdbId);
+                        movieIds = new MovieIds(imdb, slug, tmdb, trakt);
                     }
                     String logoUrl = "http://";
                     if (movieJSON.has("images")) {
                         JSONObject imageObject = movieJSON.getJSONObject("images");
-                        if (imageObject.has("logo")) {
+                        if (imageObject.has("poster")) {
                             JSONObject logoObject = imageObject.getJSONObject("poster");
-                            logoUrl = logoObject.has("full") ? logoObject.getString("full") : "http://";
+                            logoUrl = logoObject.has("thumb") ? logoObject.getString("thumb") : "http://";
                         }
                     }
 
@@ -150,7 +143,7 @@ public class MovieController extends Fragment {
         @Override
         protected void onPostExecute(ArrayList<Movie> movies) {
             super.onPostExecute(movies);
-            // TODO: 11/07/2016 call activity's listview adapter
+            mFirstActivity.setUpMovies(movies);
         }
     }
 
@@ -158,6 +151,8 @@ public class MovieController extends Fragment {
     private String buildPopularUrl(String page) {
         StringBuilder urlBuilder = new StringBuilder(URL_MOVIE_POPULAR);
         urlBuilder.append("&page=").append(page);
-        return urlBuilder.toString();
+        String url = urlBuilder.toString();
+        Log.v("URL", url);
+        return url;
     }
 }

@@ -2,4 +2,12 @@
 <resources>
     <item name="toolbar" type="id" />
     <item name="movie_image" type="id" />
+    <item name="movie_title" type="id" />
+    <item name="movie_year" type="id" />
+    <item name="divider" type="id" />
+    <item name="trakt" type="id" />
+    <item name="slug" type="id" />
+    <item name="imdb" type="id" />
+    <item name="tmdb" type="id" />
+    <item name="movies" type="id" />
 </resources>

@@ -8,7 +8,7 @@ public class AppConstants {
 
     //API constants
     public static final int NUMBER_OF_ITEMS_PER_REQUEST = 10;
-    public static final String URL_MOVIE_POPULAR = "https://api.trakt.tv/movie/popular?extended=images";
+    public static final String URL_MOVIE_POPULAR = "https://api.trakt.tv/movies/popular?extended=images";
     public static final String URL_MOVIE_SEARCH = "https://api.trakt.tv/search/movie?extended=images";
     public static final String CONTENT_TYPE = "application/json";
     public static final String TRAKT_API_VERSION = "trakt-api-version";

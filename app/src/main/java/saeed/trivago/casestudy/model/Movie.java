@@ -17,19 +17,18 @@ public class Movie {
     //Logo URL of movie
     private String mLogoUrl;
 
-    //A list representing IDs for movie;
-    private ArrayList<MovieId> mMovieIds;
-
+    //IDs of movie
+    private MovieIds mMovieIds;
 
     /**
-     * Constructs a new movie with a title,year of release, logo and {@code ArrayList} of MovieId
+     * Constructs a new movie with a title,year of release, logo and {@code ArrayList} of MovieIds
      *
      * @param mMovieTitle Title of the movie
      * @param mMovieYear  Year of released of the movie
      * @param mLogoUrl    Logo of the movie
      * @param mMovieIds   Ids of the movie
      */
-    public Movie(String mMovieTitle, String mMovieYear, String mLogoUrl, ArrayList<MovieId> mMovieIds) {
+    public Movie(String mMovieTitle, String mMovieYear, String mLogoUrl, MovieIds mMovieIds) {
         this.mMovieTitle = mMovieTitle;
         this.mMovieYear = mMovieYear;
         this.mLogoUrl = mLogoUrl;
@@ -68,7 +67,7 @@ public class Movie {
      *
      * @return The Ids of movie
      */
-    public ArrayList<MovieId> getmMovieIds() {
+    public MovieIds getmMovieIds() {
         return mMovieIds;
     }
 }
