@@ -14,12 +14,13 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import okhttp3.Call;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import saeed.trivago.casestudy.model.Movie;
 import saeed.trivago.casestudy.model.MovieId;
-import saeed.trivago.casestudy.ui.FirstActivity;
+import saeed.trivago.casestudy.ui.MovieActivity;
 
 import static saeed.trivago.casestudy.util.AppConstants.CONTENT_TYPE;
 import static saeed.trivago.casestudy.util.AppConstants.IS_DEBUG;
@@ -28,35 +29,50 @@ import static saeed.trivago.casestudy.util.AppConstants.TRAKT_API_KEY_VALUE;
 import static saeed.trivago.casestudy.util.AppConstants.TRAKT_API_VERSION;
 import static saeed.trivago.casestudy.util.AppConstants.TRAKT_API_VERSION_VALUE;
 import static saeed.trivago.casestudy.util.AppConstants.URL_MOVIE_POPULAR;
-import static saeed.trivago.casestudy.util.AppConstants.URL_MOVIE_SEARCH;
 
 /**
  * Created by saeed on 11/07/2016.
  */
 public class MovieController extends Fragment {
 
-    private FirstActivity mFirstActivity;
+    private MovieActivity mFirstActivity;
+    private GetPopularMovies mGetPopularMovies;
+
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mFirstActivity = (FirstActivity) context;
+        mFirstActivity = (MovieActivity) context;
+    }
+
+    public void getPopularMovies(String page) {
+        mGetPopularMovies = new GetPopularMovies();
+        mGetPopularMovies.execute(page);
+    }
+
+    public void cancelRequestPopular() {
+        if (mGetPopularMovies != null && (mGetPopularMovies.getStatus() == AsyncTask.Status.RUNNING || mGetPopularMovies.getStatus() == AsyncTask.Status.PENDING)) {
+            mGetPopularMovies.cancel(true);
+        }
     }
 
     @Override
+
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
     }
 
 
-    private class GetPopularMovie extends AsyncTask<String, Void, ArrayList<Movie>> {
+    private class GetPopularMovies extends AsyncTask<String, Void, ArrayList<Movie>> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
             // TODO: 11/07/2016 show progress view
         }
+
+        private Call mCall;
 
         @Override
         protected ArrayList<Movie> doInBackground(String... params) {
@@ -72,7 +88,8 @@ public class MovieController extends Fragment {
                         .url(url)
                         .get()
                         .build();
-                Response okHttpResponse = okHttpClient.newCall(request).execute();
+                mCall = okHttpClient.newCall(request);
+                Response okHttpResponse = mCall.execute();
                 String response = okHttpResponse.body().string();
                 if (IS_DEBUG) {
                     Log.v("Response", response);
@@ -106,7 +123,7 @@ public class MovieController extends Fragment {
                     if (movieJSON.has("images")) {
                         JSONObject imageObject = movieJSON.getJSONObject("images");
                         if (imageObject.has("logo")) {
-                            JSONObject logoObject = imageObject.getJSONObject("logo");
+                            JSONObject logoObject = imageObject.getJSONObject("poster");
                             logoUrl = logoObject.has("full") ? logoObject.getString("full") : "http://";
                         }
                     }
@@ -125,6 +142,9 @@ public class MovieController extends Fragment {
         @Override
         protected void onCancelled() {
             super.onCancelled();
+            if (mCall != null) {
+                mCall.cancel();
+            }
         }
 
         @Override
