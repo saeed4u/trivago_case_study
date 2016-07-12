@@ -41,10 +41,12 @@ public class SearchMovieViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindData(SearchedMovie searchedMovie) {
+
         Movie movie = searchedMovie.getmMovie();
         Picasso.with(mMovieImage.getContext()).load(movie.getmLogoUrl()).error(R.drawable.ic_movie_white_48dp).placeholder(R.drawable.ic_movie_white_48dp).into(mMovieImage);
         mMovieTitle.setText(movie.getmMovieTitle());
         mMovieYear.setText(movie.getmMovieYear());
+
         MovieIds movieIds = movie.getmMovieIds();
         mMovieTraktID.setText(mMovieTraktID.getContext().getString(R.string.trakt_id, movieIds.getmTraktId()));
         mMovieSlugID.setText(mMovieSlugID.getContext().getString(R.string.slug_id, movieIds.getmSludId()));

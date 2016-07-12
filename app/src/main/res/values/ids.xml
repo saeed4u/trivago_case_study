@@ -19,4 +19,16 @@
     <item name="empty_layout" type="id" />
     <item name="movie_score" type="id" />
     <item name="searched_movies" type="id" />
+    <item name="title_label" type="id" />
+    <item name="movie_title_divider" type="id" />
+    <item name="year_label" type="id" />
+    <item name="movie_year_divider" type="id" />
+    <item name="trakt_id_divider" type="id" />
+    <item name="trakt_label" type="id" />
+    <item name="slug_label" type="id" />
+    <item name="slug_id_divider" type="id" />
+    <item name="imdb_label" type="id" />
+    <item name="tmdb_id" type="id" />
+    <item name="tmdb_label" type="id" />
+    <item name="tmdb_divider" type="id" />
 </resources>

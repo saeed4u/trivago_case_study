@@ -4,10 +4,12 @@
     <string name="oops_error_occured">We\'re sorry. \n Something went wrong. Very, very, very wrong.</string>
     <string name="okay">Okay</string>
     <string name="no_movies">We\'re sorry. \n No movie was found at this time.</string>
-    <string name="trakt_id">Trakt ID : %s</string>
-    <string name="slug_id">Slug ID : %s</string>
-    <string name="imdb_id">IMDb ID : %s</string>
-    <string name="tmdb_id">TMDb ID : %s</string>
-    <string name="movie_score">Score : %s</string>
+    <string name="trakt_id">Trakt ID %s</string>
+    <string name="slug_id">Slug ID %s</string>
+    <string name="imdb_id">IMDb ID %s</string>
+    <string name="tmdb_id">TMDb ID %s</string>
+    <string name="movie_score">Score %s</string>
     <string name="movie_image">Movie Image</string>
+    <string name="title">Title</string>
+    <string name="year">Year</string>
 </resources>
