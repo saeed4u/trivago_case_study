@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF5722</color>
-    <color name="colorPrimaryDark">#E64A19</color>
+    <color name="colorPrimary">#00BCD4</color>
+    <color name="colorPrimaryDark">#0097A7</color>
     <color name="colorAccent">#FFEB3B</color>
+    <color name="colorAccentTransparent">#1AFFEB3B</color>
     <color name="windowBackground">#E6E6E6</color>
+    <color name="errorColor">#ef5350</color>
+    <color name="textColor">#212121</color>
+    <color name="scoreColor">#0097A7</color>
 </resources>

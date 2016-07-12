@@ -16,7 +16,6 @@ public class AppConstants {
     public static final String TRAKT_API_KEY = "trakt-api-key";
     public static final String TRAKT_API_KEY_VALUE = "ad005b8c117cdeee58a1bdb7089ea31386cd489b21e14b19818c91511f12a086";
 
-
     //General constants
     public static final boolean IS_DEBUG = true;
 }

@@ -10,4 +10,13 @@
     <item name="imdb" type="id" />
     <item name="tmdb" type="id" />
     <item name="movies" type="id" />
+    <item name="movie_details" type="id" />
+    <item name="search_menu" type="id" />
+    <item name="loading_movies" type="id" />
+    <item name="update_movie_loader" type="id" />
+    <item name="error_occured" type="id" />
+    <item name="empty_list" type="id" />
+    <item name="empty_layout" type="id" />
+    <item name="movie_score" type="id" />
+    <item name="searched_movies" type="id" />
 </resources>
